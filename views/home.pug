@@ -1,0 +1,22 @@
+extends layout.pug
+block contents 
+
+    if blogs 
+        each blog in blogs
+
+            div(class ="card")
+                div(class ="card-body")
+                    div(class="heading")
+                        div(class = "card-title")
+                            h3 #{blog.title}   
+                        div(class = "card-date")
+                            h5(class = "card-date")= blog.Date       
+
+                    p(class = "card-description") #{blog.message}
+
+                    p(class="creator") created by #{blog.author.username}
+
+                    a(href="/"+blog._id ) view
+
+
+    

@@ -1,0 +1,39 @@
+extends layout.pug
+block contents 
+    if blog
+        div(class ="blog-container")
+            h2 #{blog.title}
+            p #{blog.message}
+            h3 comment ..
+
+    if comments
+        each comment in comments
+            div(class ="card")
+                div(class ="card-body")
+                    div(class="heading")
+                        div(class = "card-title")
+                            h3 #{comment.username}  
+                        div(class = "card-date")
+                            h5(class = "card-date") #{comment.Date}      
+
+                    p(class = "card-description") #{comment.message}
+
+    div(class="form")
+
+        if(error)
+            b #{error.msg}                
+
+        form( method="POST" , action="")
+                div(class="form-label")
+                    label(for="username") Username
+
+                div(class="form-field")    
+                    input(type="text",placeholder="singh04", name="username")
+
+                div(class="form-label")
+                    label(for="comment") comment
+
+                div(class="form-field")    
+                    input(type="text",placeholder="very nie", name="message")
+
+                button(type="submit") post                            
