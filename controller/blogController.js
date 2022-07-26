@@ -5,8 +5,9 @@ const formatdistance = require('date-fns/formatDistanceToNow');
 exports.blogs = async function(req,res){
      
     try{
-        const response = await axios.get('http://localhost:3001/blogs');
+        const response = await axios.get('http://localhost:3001/blogs/');
         if(response.status === 200){
+            res.locals.require = require;
             res.render('home',{blogs:response.data.blogs,format:formatdistance});
         }else{
             res.render('home',{error:response.data["error"]});
@@ -19,9 +20,9 @@ exports.blogs = async function(req,res){
 exports.blogs_view = async function(req,res){
      
     try{
-        const response = await axios.get('http://localhost:3001/blogs/'+req.params.id);
+        const response = await axios.get('http://localhost:3001/blogs/'+req.params.id+'/one');
         if(response.status === 200){
-            console.log(response.data)
+            res.locals.require = require;
             res.render('view',{blog:response.data.blog,comments:response.data.comment,format:formatdistance});
         }else{
             res.render('view',{error:response.data["error"]});
@@ -40,7 +41,7 @@ exports.post_comment =[
         const error = validationResult(req)
 
         if(!error.isEmpty()){
-            
+            res.locals.require = require;
             return res.render({errors:error.array(),data:req.body})
              
         }
@@ -53,7 +54,7 @@ exports.post_comment =[
         }
 
         try{
-            const response = await axios.post('http://localhost:3001/blogs/'+req.params.id+"/createcomment",{comment});
+            const response = await axios.post('http://localhost:3001/comment/'+req.params.id+"/createcomment",{comment});
             if(response.status === 200){
                 console.log(response.data)
                 res.redirect('/'+ req.params.id)//,{blog:response.data.blog,Comment:response.data.comment});

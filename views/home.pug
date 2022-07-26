@@ -10,7 +10,9 @@ block contents
                         div(class = "card-title")
                             h3 #{blog.title}   
                         div(class = "card-date")
-                            h5(class = "card-date")= blog.Date       
+                            - const moment = require('moment')
+                            h5(class = "card-date")= moment(blog.date).format('YYYY-MM-DD')     
+       
 
                     p(class = "card-description") #{blog.message}
 

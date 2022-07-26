@@ -14,7 +14,9 @@ block contents
                         div(class = "card-title")
                             h3 #{comment.username}  
                         div(class = "card-date")
-                            h5(class = "card-date") #{comment.Date}      
+                            - const moment = require('moment')
+                            h5(class = "card-date")= moment(comment.Date).format('YYYY-MM-DD')     
+      
 
                     p(class = "card-description") #{comment.message}
 
